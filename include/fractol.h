@@ -23,10 +23,13 @@ typedef	struct		s_mlx
 	float			x2;
 	float			y1;
 	float			y2;
+	int				iter;
 }					t_mlx;
 
 void				error(char *str);
 int					clear_img(t_mlx *ptr);
-void				ft_put_pixel(t_mlx *ptr, int y, int x);
+void				ft_put_pixel(t_mlx *ptr, int y, int x, int color);
 int					draw_fract(t_mlx *f);
+int					init_color(t_mlx *f, int i);
+
 #endif

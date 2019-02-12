@@ -12,9 +12,16 @@ int		clear_img(t_mlx	*ptr)
 	return (0);
 }
 
-void	ft_put_pixel(t_mlx *p, int y, int x)
+void	ft_put_pixel(t_mlx *p, int y, int x, int color)
 {
 	if (x < 0 || y < 0 || x >= W || y >= H)
 		return ;
-	p->img_data[y * W + x] = p->color;
+	p->img_data[y * W + x] = color;
+}
+
+int		init_color(t_mlx *f, int i)
+{
+	int	col;
+	col = i*255/f->iter;
+	return (col);
 }
