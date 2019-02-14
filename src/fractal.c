@@ -1,31 +1,28 @@
-#include "../include/fractol.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractal.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/14 12:28:13 by lloncham          #+#    #+#             */
+/*   Updated: 2019/02/14 17:25:09 by lloncham         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void		init_mandelbrot(t_mlx *f)
-{
-	f->iter = 16;
-	f->zoom = 250;
-	f->x1 = -2.1;
-	f->x2 = 0.6;
-	f->y1 = -1.2;
-	f->y2 = 1.2;
-}
+#include "../include/fractol.h"
 
 int		mandelbrot(t_mlx *f, int x, int y)
 {
+	double tmp;
 	int i;
-	int tmp;
-	
-	f->zr = 0;
-	f->zi = 0;
-	f->cr = x / f->zoom + f->x1;
-	f->ci = y / f->zoom + f->y1;
-	i = 0;
-	while (i < f->iter && (f->zr * f->zr + f->zi * f->zi) < 4)
+	i = -1;
+	init_fract(f, x, y);
+	while (++i < f->iter && f->z_r * f->z_r + f->z_i * f->z_i < 4)
 	{
-		tmp = f->zr;
-		f->zr = f->zr * f->zr - f->zi * f->zi + f->cr;
-		f->zi = 2 * tmp * f->zi + f->ci;
-		i++;
+		tmp = f->z_r;
+		f->z_r = f->z_r * f->z_r - f->z_i * f->z_i + f->c_r;
+	    f->z_i = 2 * f->z_i * tmp + f->c_i;
 	}
 	return (i);
 }
@@ -35,16 +32,14 @@ int			draw_fract(t_mlx *f)
 	int x;
 	int y;
 	int color;
-
 	y = 0;
-	init_mandelbrot(f);
-	while (y < H)
+	while (y < f->size_h)
 	{
 		x = 0;
-		while (x < W)
+		while (x < f->size_w)
 		{
 			color = init_color(f, mandelbrot(f, x, y));
-			ft_put_pixel(f, x, y, color);
+			ft_put_pixel(f, y, x, color);
 			x++;
 		}
 		y++;

@@ -4,7 +4,8 @@ CC = gcc
 
 CFLAG = -Wall -Wextra -Werror
 
-SRC = ./src/main.c ./src/tools.c ./src/fractal.c ./src/deco.c
+SRC = ./src/main.c ./src/tools.c ./src/fractal.c ./src/deco.c ./src/init_fract.c
+
 
 OBJECTS = $(SRC:.c=.o)
 	RED=\033[1;31m

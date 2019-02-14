@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/14 15:08:15 by lloncham          #+#    #+#             */
+/*   Updated: 2019/02/14 17:01:21 by lloncham         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/fractol.h"
 
 void	error(char *str)
@@ -8,15 +20,15 @@ void	error(char *str)
 
 int		clear_img(t_mlx	*ptr)
 {
-	bzero(ptr->img_data, W * H * 4);
+	bzero(ptr->img_data, ptr->size_w * ptr->size_h * 4);
 	return (0);
 }
 
 void	ft_put_pixel(t_mlx *p, int y, int x, int color)
 {
-	if (x < 0 || y < 0 || x >= W || y >= H)
+	if (x < 0 || y < 0 || x >= p->size_w || y >= p->size_h)
 		return ;
-	p->img_data[y * W + x] = color;
+	p->img_data[y * p->size_w + x] = color;
 }
 
 int		init_color(t_mlx *f, int i)
