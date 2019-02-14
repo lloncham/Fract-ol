@@ -16,11 +16,18 @@ int		deal_key(int key, t_mlx *ptr)
 {
 	ft_putnbr(key);
 	ft_putchar('\n');
+	clear_img(ptr);
+	if (key == 125)
+		ptr->iter += 10;
+	if (key == 126)
+		ptr->iter -= 10;
 	if (key == 53)
 	{
 		mlx_destroy_window(ptr->mlx, ptr->win);
 		exit(0);
 	}
+	draw_fract(ptr);
+	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img, 0, 0);
 	return (0);
 }
 
@@ -28,18 +35,18 @@ int		mouse_hook(int button, int x, int y, t_mlx *ptr)
 {
 	ft_putnbr(button);
 	ft_putchar('\n');
-	//clear_img(ptr);
-	if (button == 6)
+	clear_img(ptr);
+	if (button == 1)
 	{
-		x = ptr->imgx/2;
-		y = ptr->imgy/2;
+		x = ptr->size_w/2;
+		y = ptr->size_h/2;
+		ptr->x1 = x / ptr->zoom - ptr->x1;
+		ptr->x2 = x / ptr->zoom + ptr->x2;
+		ptr->y1 = x / ptr->zoom - ptr->y1;
+		ptr->y2 = y / ptr->zoom + ptr->y2;
 		ptr->zoom += 10;
-		ptr->x1 = x - ptr->x1;
-		ptr->x2 = x + ptr->x2;
-		ptr->y1 = x - ptr->y1;
-		ptr->y2 = y + ptr->y2;
 	}
-	if (button == 7)
+	if (button == 2)
 	{
 		ptr->zoom -= 10;
 	}
@@ -60,7 +67,6 @@ void	mlx(t_mlx *ptr)
 	ptr->img = mlx_new_image(ptr->mlx, ptr->size_w, ptr->size_h);
 	ptr->img_data = (int *)mlx_get_data_addr(ptr->img, &bpp, &size_l, &endian);
 	draw_fract(ptr);
-	ft_putnbr(ptr->imgx);
 	mlx_hook(ptr->win, 2, 0, deal_key, ptr);
 	mlx_mouse_hook(ptr->win, mouse_hook, ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img, 0, 0);

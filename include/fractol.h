@@ -25,7 +25,7 @@ typedef	struct		s_mlx
 	int				*img_data;
 	int				color;
 	int				zoom;
-	int				iter;
+	double				iter;
 	int				choose;
 	double			imgx;
 	double			imgy;
