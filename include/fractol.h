@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:13:06 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/14 16:56:05 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/15 12:26:34 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,20 @@ typedef	struct		s_mlx
 	int				*img;
 	int				*img_data;
 	int				color;
-	int				zoom;
-	double				iter;
+	float			zoomy;
+	float			zoomx;
+	float			iter;
 	int				choose;
-	double			imgx;
-	double			imgy;
-	double			c_r;
-	double			c_i;
-	double			z_r;
-	double			z_i;
-	double			x1;
-	double			x2;
-	double			y1;
-	double			y2;
+	float			imgx;
+	float			imgy;
+	float			c_r;
+	float			c_i;
+	float			z_r;
+	float			z_i;
+	float			x1;
+	float			x2;
+	float			y1;
+	float			y2;
 	int				size_h;
 	int				size_w;
 }					t_mlx;
