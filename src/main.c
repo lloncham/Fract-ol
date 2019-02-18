@@ -12,29 +12,44 @@
 
 #include "../include/fractol.h"
 
+void	reset_all(t_mlx *ptr)
+{
+	if (ptr->choose == 1)
+		*ptr = init_mandelbrot(*ptr);
+	if (ptr->choose == 2)
+		*ptr = init_julia(*ptr);
+	if (ptr->choose == 3)
+		*ptr = init_third(*ptr);
+}
+
 int		deal_key(int key, t_mlx *ptr)
 {
 	ft_putnbr(key);
 	ft_putchar('\n');
 	clear_img(ptr);
 	if (key == 126)
-		ptr->y1 += 0.025;
-	if (key == 125)
 		ptr->y1 -= 0.025;
+	if (key == 125)
+		ptr->y1 += 0.025;
 	if (key == 123)
-		ptr->x1 += 0.025;
-	if (key == 124)
 		ptr->x1 -= 0.025;
+	if (key == 124)
+		ptr->x1 += 0.025;
 	if (key == 49)
 		ptr->color += 10;
 	if (key == 34)
 		ptr->iter -= 5;
+	if (key == 35)
+		ptr->iter += 5;
+	if (key == 15)
+		reset_all(ptr);
 	if (key == 53)
 	{
 		mlx_destroy_window(ptr->mlx, ptr->win);
 		exit(0);
 	}
 	draw_fract(ptr);
+	put_info(ptr);
 	return (0);
 }
 
@@ -47,26 +62,25 @@ int		mouse_hook(int button, int x, int y, t_mlx *ptr)
 	y -= ptr->size_h/2;
 	if (button == 4)
 	{
-		ptr->zoomy = (ptr->zoomy + (ptr->y2 - ptr->y1) / ptr->size_h) * 1.1;
-		ptr->zoomx = (ptr->zoomx + (ptr->x2 - ptr->x1) / ptr->size_w) * 1.1;
+		ptr->zoomy = (ptr->zoomy + (ptr->y2 - ptr->y1) / ptr->size_h) * 1.2;
+		ptr->zoomx = (ptr->zoomx + (ptr->x2 - ptr->x1) / ptr->size_w) * 1.2;
 		ptr->iter += 1;
 		ptr->x1 += x / ptr->zoomx;
-		ptr->x2 += x / ptr->zoomx;
+		ptr->x2 = x / ptr->zoomx + ptr->x1;
 		ptr->y1 += y / ptr->zoomx;
-		ptr->y2 += y / ptr->zoomx;
-		
+		ptr->y2 = y / ptr->zoomx + ptr->y1;
 	}
 	if (button == 5)
 	{
-		ptr->zoomy = (ptr->zoomy + (ptr->y2 - ptr->y1) / ptr->size_h) / 1.1;
-		ptr->zoomx = (ptr->zoomx + (ptr->x2 - ptr->x1) / ptr->size_w) / 1.1;
+		ptr->zoomy = (ptr->zoomy + (ptr->y2 - ptr->y1) / ptr->size_h) / 1.2;
+		ptr->zoomx = (ptr->zoomx + (ptr->x2 - ptr->x1) / ptr->size_w) / 1.2;
 		ptr->x1 += x / ptr->zoomx;
-		ptr->x2 += x / ptr->zoomx;
+		ptr->x2 = x / ptr->zoomx + ptr->x1;
 		ptr->y1 += y / ptr->zoomx;
-		ptr->y2 += y / ptr->zoomx;
-
+		ptr->y2 += y / ptr->zoomx + ptr->x1;
 	}
 	draw_fract(ptr);
+	put_info(ptr);
 	return (0);
 }
 
@@ -76,9 +90,14 @@ int	motion_hook(int x, int y, t_mlx *ptr)
 	float dy;
 	if (x < ptr->size_w && y < ptr->size_h && x > 0 && y > 0)
 	{	
-		dx = ((float)x - ((float)ptr->size_w) / 2) / (ptr->size_w / 2);
-		dy = ((float)y - ((float)ptr->size_h) / 2) / (ptr->size_h / 2);
+		dx = ((float)x - ((float)ptr->size_w) / 2) / ((float)ptr->size_w / 2);
+		dy = ((float)y - ((float)ptr->size_h) / 2) / ((float)ptr->size_h / 2);
+		ptr->c_r = dx;
+		ptr->c_i = dy;
 		printf("x = %f ; y = %f \n", dx , dy);
+		printf("cr = %f ; ci = %f \n", ptr->c_r , ptr->c_i);
+		draw_fract(ptr);
+		put_info(ptr);
 	}
 	return (0);
 }
@@ -98,6 +117,7 @@ void	mlx(t_mlx *ptr)
 	mlx_hook(ptr->win, 2, 0, deal_key, ptr);
 	mlx_hook(ptr->win, 6, 0, motion_hook, ptr);
 	mlx_mouse_hook(ptr->win, mouse_hook, ptr);
+	put_info(ptr);
 	mlx_loop(ptr->mlx);
 }
 
@@ -109,7 +129,13 @@ int		main(int ac, char **av)
 		error("usage : [./fractol] [Mandelbrot/Julia/..]");
 	if (ft_strcmp(av[1], "Mandelbrot") == 0)
 		ptr = init_mandelbrot(ptr);
-	if (ft_strcmp(av[1], "Julia") == 0)
+	else if (ft_strcmp(av[1], "Julia") == 0)
 		ptr = init_julia(ptr);
+	else if (ft_strcmp(av[1], "Third") == 0)
+		ptr = init_third(ptr);
+	else if (ft_strcmp(av[1], "Tricorn") == 0)
+		ptr = init_tricorn(ptr);
+	else
+		error("usage : [./fractol] [Mandelbrot/Julia/..]");
 	mlx(&ptr);
 }

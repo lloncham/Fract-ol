@@ -42,6 +42,7 @@ typedef	struct		s_mlx
 	int				size_w;
 }					t_mlx;
 
+void				put_info(t_mlx *ptr);
 void				error(char *str);
 int					clear_img(t_mlx *ptr);
 void				ft_put_pixel(t_mlx *ptr, int y, int x, int color);
@@ -50,5 +51,7 @@ int					init_color(t_mlx *f, int i);
 void				init_fract(t_mlx *f, int x, int y);
 t_mlx				init_mandelbrot(t_mlx ptr);
 t_mlx				init_julia(t_mlx ptr);
+t_mlx				init_third(t_mlx ptr);
+t_mlx				init_tricorn(t_mlx ptr);
 
 #endif
