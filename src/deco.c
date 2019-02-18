@@ -3,11 +3,16 @@
 void	put_info(t_mlx *ptr)
 {
 	if (ptr->choose == 1)
-		mlx_string_put(ptr->mlx, ptr->win, ptr->size_w - 110, ptr->size_h - 30, 0xffffff, "Mandelbrot");
+		mlx_string_put(ptr->mlx, ptr->win, ptr->size_w - 110, ptr->size_h - 30, 0xffffff, "MANDELBROT");
 	if (ptr->choose == 2)
-		mlx_string_put(ptr->mlx, ptr->win, ptr->size_w - 60, ptr->size_h - 30, 0xffffff, "Julia");
+	{
+		mlx_string_put(ptr->mlx, ptr->win, ptr->size_w - 60, ptr->size_h - 30, 0xffffff, "JULIA");
+		mlx_string_put(ptr->mlx, ptr->win, 10, 140, 0xffffff, "Stop / Play : S, G");
+	}
 	if (ptr->choose == 3)
-		mlx_string_put(ptr->mlx, ptr->win, ptr->size_w - 120, ptr->size_h - 30, 0xffffff, "fractol");
+		mlx_string_put(ptr->mlx, ptr->win, ptr->size_w - 60, ptr->size_h - 30, 0xffffff, "HEART");
+	if (ptr->choose == 4)
+		mlx_string_put(ptr->mlx, ptr->win, ptr->size_w - 90, ptr->size_h - 30, 0xffffff, "TRICORN");
 	mlx_string_put(ptr->mlx, ptr->win, 10, 10, 0xFFFFFF, "MENU");
 	mlx_string_put(ptr->mlx, ptr->win, 10, 40, 0xFFFFFF, "Iteration : I, P");
 	mlx_string_put(ptr->mlx, ptr->win, 10, 60, 0xFFFFFF, "Color : space");

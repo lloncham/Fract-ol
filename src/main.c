@@ -27,6 +27,10 @@ int		deal_key(int key, t_mlx *ptr)
 	ft_putnbr(key);
 	ft_putchar('\n');
 	clear_img(ptr);
+	if (key == 1)
+		ptr->stop = 1;
+	if (key == 5)
+		ptr->stop = 2;
 	if (key == 126)
 		ptr->y1 -= 0.025;
 	if (key == 125)
@@ -88,7 +92,7 @@ int	motion_hook(int x, int y, t_mlx *ptr)
 {
 	float dx;
 	float dy;
-	if (x < ptr->size_w && y < ptr->size_h && x > 0 && y > 0)
+	if (x < ptr->size_w && y < ptr->size_h && x > 0 && y > 0 && ptr->stop == 2)
 	{	
 		dx = ((float)x - ((float)ptr->size_w) / 2) / ((float)ptr->size_w / 2);
 		dy = ((float)y - ((float)ptr->size_h) / 2) / ((float)ptr->size_h / 2);
@@ -137,5 +141,6 @@ int		main(int ac, char **av)
 		ptr = init_tricorn(ptr);
 	else
 		error("usage : [./fractol] [Mandelbrot/Julia/..]");
+	ptr.stop = 2;
 	mlx(&ptr);
 }

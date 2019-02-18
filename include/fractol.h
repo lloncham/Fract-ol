@@ -24,6 +24,7 @@ typedef	struct		s_mlx
 	int				*img;
 	int				*img_data;
 	int				color;
+	int				stop;
 	float			zoomy;
 	float			zoomx;
 	float			iter;
