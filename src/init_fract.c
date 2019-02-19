@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 13:59:15 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/15 15:51:33 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/19 17:05:51 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ t_mlx		init_mandelbrot(t_mlx ptr)
 t_mlx		init_julia(t_mlx ptr)
 {
 	ptr.choose = 2;
-	//ptr.x1 = -1;
-	//ptr.x2 = 1;
 	ptr.x1 = -1.5;
 	ptr.x2 = 1.5;
 	ptr.y1 = -1.4;
@@ -50,7 +48,7 @@ t_mlx		init_julia(t_mlx ptr)
 	return (ptr);
 }
 
-t_mlx		init_third(t_mlx ptr)
+t_mlx		init_heart(t_mlx ptr)
 {
 	ptr.choose = 3;
 	ptr.x1 = -2.3;
@@ -86,3 +84,19 @@ t_mlx		init_tricorn(t_mlx ptr)
 	return (ptr);
 }
 
+t_mlx		init_burningship(t_mlx ptr)
+{
+	ptr.choose = 5;
+	ptr.x1 = -2.1;
+	ptr.x2 = 1.3;
+	ptr.y1 = -2;
+	ptr.y2 = 0.8;
+	ptr.zoomx = 300;
+	ptr.zoomy = 300;
+	ptr.imgx = (ptr.x2 - ptr.x1) * ptr.zoomx;
+	ptr.imgy = (ptr.y2 - ptr.y1) * ptr.zoomy;
+	ptr.size_w = ptr.imgx;
+	ptr.size_h = ptr.imgy;
+	ptr.iter = 50;
+	return (ptr);
+}

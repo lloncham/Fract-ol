@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:13:06 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/15 12:26:34 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/19 16:53:03 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "../libft/libft.h"
 #include "../minilibx_macos/mlx.h"
-
+#include <math.h>
 
 typedef	struct		s_mlx
 {
@@ -39,6 +39,7 @@ typedef	struct		s_mlx
 	float			x2;
 	float			y1;
 	float			y2;
+	float			nb;
 	int				size_h;
 	int				size_w;
 }					t_mlx;
@@ -48,11 +49,15 @@ void				error(char *str);
 int					clear_img(t_mlx *ptr);
 void				ft_put_pixel(t_mlx *ptr, int y, int x, int color);
 int					draw_fract(t_mlx *f);
-int					init_color(t_mlx *f, int i);
+void				init(t_mlx *f, int x, int y);
 void				init_fract(t_mlx *f, int x, int y);
 t_mlx				init_mandelbrot(t_mlx ptr);
 t_mlx				init_julia(t_mlx ptr);
-t_mlx				init_third(t_mlx ptr);
+t_mlx				init_heart(t_mlx ptr);
 t_mlx				init_tricorn(t_mlx ptr);
+t_mlx				init_burningship(t_mlx ptr);
+int					ispaire(int nb);
+void				reset_all(t_mlx *ptr);
+void				usage(void);
 
 #endif
