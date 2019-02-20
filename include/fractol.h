@@ -6,16 +6,16 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:13:06 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/19 16:53:03 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/20 15:46:21 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-#include "../libft/libft.h"
-#include "../minilibx_macos/mlx.h"
-#include <math.h>
+# include "../libft/libft.h"
+# include "../minilibx_macos/mlx.h"
+# include <math.h>
 
 typedef	struct		s_mlx
 {

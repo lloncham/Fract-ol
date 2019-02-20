@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:30:47 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/19 18:08:29 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/20 15:55:26 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int		deal_key(int key, t_mlx *ptr)
 {
-	ft_putnbr(key);
-	ft_putchar('\n');
 	clear_img(ptr);
 	if (key == 49)
 		ptr->stop += 1;
@@ -29,8 +27,6 @@ int		deal_key(int key, t_mlx *ptr)
 		(key == 78) ? (ptr->iter -= 5) : (ptr->iter += 5);
 	if (key == 15)
 		reset_all(ptr);
-	if (key == 3)
-		(ptr->choose == 5) ? (ptr->choose = 1) : (ptr->choose += 1);
 	if (key == 53)
 	{
 		mlx_destroy_window(ptr->mlx, ptr->win);
@@ -58,8 +54,8 @@ int		mouse_hook(int button, int x, int y, t_mlx *ptr)
 	}
 	if (button == 5)
 	{
-		ptr->zoomy -= 20;
-		ptr->zoomx -= 20;
+		ptr->zoomy = (ptr->zoomy + (ptr->y2 - ptr->y1) / ptr->size_h) / 1.2;
+		ptr->zoomx = (ptr->zoomx + (ptr->x2 - ptr->x1) / ptr->size_w) / 1.2;
 	}
 	draw_fract(ptr);
 	put_info(ptr);
@@ -123,4 +119,5 @@ int		main(int ac, char **av)
 	else
 		usage();
 	mlx(&ptr);
+	return (0);
 }

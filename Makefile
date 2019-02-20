@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lloncham <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/02/20 11:56:33 by lloncham          #+#    #+#              #
+#    Updated: 2019/02/20 15:44:39 by lloncham         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = fractol
 
 CC = gcc
@@ -5,7 +17,6 @@ CC = gcc
 CFLAG = -Wall -Wextra -Werror
 
 SRC = ./src/main.c ./src/tools.c ./src/fractal.c ./src/deco.c ./src/init_fract.c ./src/initri.c
-
 
 OBJECTS = $(SRC:.c=.o)
 	RED=\033[1;31m
